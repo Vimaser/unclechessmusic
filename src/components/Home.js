@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
+import React from "react";
+// import React, { useState, useEffect } from "react";
+/* import {
   getFirestore,
   doc,
   getDoc,
@@ -8,7 +9,7 @@ import {
   query,
   orderBy,
 } from "firebase/firestore";
-import { app } from "../firebase";
+import { app } from "../firebase"; */
 import "./css/Home.css";
 //import img from "../img/z.png";
 
