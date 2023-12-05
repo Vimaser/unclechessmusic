@@ -24,32 +24,32 @@ const Footer = () => {
           >
             Bandcamp
           </a>
-{/*           <a
+          <a
             className="social-link"
-            href="https://open.spotify.com/artist/5QQ0CutnlVZTg7xQNMvMqJ"
+            href="https://twitter.com/UncleChess"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Spotify
+            X / Twitter
           </a>
         </div>
         <div className="social-links-2">
           <a
             className="social-link"
-            href="https://open.spotify.com/artist/5QQ0CutnlVZTg7xQNMvMqJ"
+            href="https://www.youtube.com/@unclechess5746/featured"
             target="_blank"
             rel="noopener noreferrer"
           >
             YouTube
-          </a> */}
-          {/* <a
+          </a>
+          <a
             className="social-link"
-            href="https://www.tiktok.com/@theaaronjustice?_t=8gGlSMm2vyF&_r=1&fbclid=IwAR1HVTO_FuCRbKqnZqWcQSpvjf7zpMvcXpf_sNUTmrfMXkkpTeCxj7735Ww"
+            href="https://www.reverbnation.com/unclechess9"
             target="_blank"
             rel="noopener noreferrer"
           >
-            TikTok
-          </a> */}
+            ReverbNation
+          </a>
           <Link to="/Admin" className="social-link">
             AdminPortal
           </Link>

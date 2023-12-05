@@ -11,7 +11,7 @@ import React from "react";
 } from "firebase/firestore";
 import { app } from "../firebase"; */
 import "./css/Home.css";
-//import img from "../img/z.png";
+import img from "../img/zhome.png";
 
 function Home() {
  /*  const [featuredSong, setFeaturedSong] = useState({
@@ -124,8 +124,8 @@ function Home() {
     <div className="home-background-image">
       <div className="container mt-5">
         <section className="image-section">
-          {/* <img src={img} alt="Unlcle Chess" />
-          <p>Explore the music of the coolest cat you know Uncle Chess</p> */}
+          <img src={img} alt="Unlcle Chess" />
+          {/* <p>Explore the music of the coolest cat you know Uncle Chess</p>  */}
         </section>
 
         {/*    <section>

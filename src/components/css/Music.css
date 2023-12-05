@@ -1,7 +1,4 @@
 /* Music.css */
-* {
-  background-color: black; /* Applies black background color to all elements */
-}
 /* Styles for the outer container with class music-background */
 .music-background {
     background-color: black;
@@ -10,6 +7,7 @@
   
   /* Styles for the inner container with class music-container */
   .music-container {
+    background-color: black;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -17,6 +15,7 @@
   
   /* Styles for the section containing the heading */
   .music-container h1 {
+    background-color: black;
     color: #ccc;
     font-size: 24px;
     margin-bottom: 20px;
@@ -25,6 +24,7 @@
   
   /* Styles for each music item with class music-item */
   .music-item {
+    background-color: black;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -34,6 +34,7 @@
   
   /* Styles for the title within each music item */
   .music-item h2 {
+    background-color: black;
     color: #ccc;
     font-size: 20px;
     margin-bottom: 10px;
@@ -41,6 +42,7 @@
   
   /* Styles for the release date paragraph within each music item */
   .music-item p {
+    background-color: black;
     color: #ccc;
     font-size: 14px;
     margin-bottom: 10px;

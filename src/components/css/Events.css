@@ -8,6 +8,7 @@
   
   /* Styles for the section containing the heading */
   .events-background h1 {
+    background-color: black;
     color: #ccc;
     font-size: 24px;
     margin-bottom: 20px;
@@ -16,6 +17,7 @@
   
   /* Styles for each event article */
   .events-background article {
+    background-color: black;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
@@ -25,6 +27,7 @@
   
   /* Styles for the event title within each article */
   .events-background article h2 {
+    background-color: black;
     color: #ccc;
     text-align: center;
     font-size: 20px;
@@ -33,6 +36,7 @@
   
   /* Styles for the event date paragraph within each article */
   .events-background article p {
+    background-color: black;
     color: #ccc;
     font-size: 14px;
     margin-bottom: 10px;
@@ -40,6 +44,7 @@
   
   /* Styles for the "No upcoming events" message */
   .events-background p {
+    background-color: black;
     font-size: 16px;
     text-align: center;
     margin-top: 20px;

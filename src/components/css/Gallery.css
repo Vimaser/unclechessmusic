@@ -1,7 +1,4 @@
 /* Gallery.css */
-* {
-    background-color: black; /* Applies black background color to all elements */
-}
 /* Styles for the outer container with class gallery-container */
 .gallery-container {
     background-color: black;
