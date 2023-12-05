@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black; /* Applies black background color to all elements */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.2em;
+    color: #555;
+    line-height: 1.6;
+}
+
+section {
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+iframe {
+    max-width: 100%;
+    border: none;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.image-section {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Optional: for rounded corners */
+}
+
+.home-background-image {
+    background-image: url('./bg.png'); /* Path to your image */
+    background-size: contain; /* Ensure the whole image is contained within the div */
+    background-position: center; /* Center the image within the div */
+    background-repeat: no-repeat;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+}
+
+/* Larger screens */
+/* @media (min-width: 1024px) {
+    .home-background-image {
+        background-size: cover;
+        background-position: top center;
+    }
+} */
+
+/* Smaller screens */
+@media (max-width: 1023px) {
+    .home-background-image {
+        background-size: 100% auto;
+        background-position: top center;
+    }
+}
