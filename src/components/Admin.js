@@ -341,7 +341,7 @@ const Admin = () => {
     });
 
     return () => unsubscribe(); // Clean up the listener
-  }, []);
+  }, [db]);
 
   useEffect(() => {
     const fetchNewsItems = async () => {
