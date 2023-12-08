@@ -35,20 +35,21 @@ const Admin = () => {
   const [musicURL, setMusicURL] = useState("");
   const [musicReleaseDate, setMusicReleaseDate] = useState("");
   const [messages, setMessages] = useState([]);
-  const [featuredSongURL, setFeaturedSongURL] = useState("");
-  const [featuredSongTitle, setFeaturedSongTitle] = useState("");
-  const [featuredSongArtist, setFeaturedSongArtist] = useState("");
-  const [newsTitle, setNewsTitle] = useState("");
-  const [newsContent, setNewsContent] = useState("");
-  const [newsDate, setNewsDate] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [newsItems, setNewsItems] = useState([]);
+//  const [featuredSongURL, setFeaturedSongURL] = useState("");
+//  const [featuredSongTitle, setFeaturedSongTitle] = useState("");
+//  const [featuredSongArtist, setFeaturedSongArtist] = useState("");
+//  const [newsTitle, setNewsTitle] = useState("");
+//  const [newsContent, setNewsContent] = useState("");
+//  const [newsDate, setNewsDate] = useState("");
+//  const [loading, setLoading] = useState(false);
+//  const [error, setError] = useState(null);
+//  const [newsItems, setNewsItems] = useState([]);
   const db = getFirestore();
+  const MAX_IMAGES = 20;
 
-  const handleTitleChange = (e) => setNewsTitle(e.target.value);
-  const handleContentChange = (e) => setNewsContent(e.target.value);
-  const handleDateChange = (e) => setNewsDate(e.target.value);
+//  const handleTitleChange = (e) => setNewsTitle(e.target.value);
+//  const handleContentChange = (e) => setNewsContent(e.target.value);
+//  const handleDateChange = (e) => setNewsDate(e.target.value);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,15 +83,13 @@ const Admin = () => {
       const messageRef = doc(db, "Messages", message.id);
       try {
         await updateDoc(messageRef, {
-          isNew: false
+          isNew: false,
         });
       } catch (error) {
         console.error("Error updating message: ", error);
       }
     }
   };
-  
-  
 
   const handleMusicUpload = async () => {
     try {
@@ -211,6 +210,11 @@ const Admin = () => {
   }, []);
 
   const handleImageUpload = async () => {
+    if (gallery.length >= MAX_IMAGES) {
+      alert(`You cannot upload more than ${MAX_IMAGES} images.`);
+      return;
+    }
+
     try {
       const storageRef = ref(getStorage(app), "gallery/" + image.name);
       await uploadBytes(storageRef, image);
@@ -287,7 +291,7 @@ const Admin = () => {
     }
   };
 
-  const handleUpdateFeaturedSong = async () => {
+ /*  const handleUpdateFeaturedSong = async () => {
     const db = getFirestore(app);
     const featuredSongRef = doc(db, "featuredSong", "1yDHsIYnMjuowB5HpP3k");
     try {
@@ -300,9 +304,9 @@ const Admin = () => {
     } catch (error) {
       console.error("Error updating featured song: ", error);
     }
-  };
+  }; */
 
-  const handleAddNews = async () => {
+/*   const handleAddNews = async () => {
     if (!newsTitle || !newsContent || !newsDate) {
       setError("All fields are required");
       return;
@@ -326,16 +330,18 @@ const Admin = () => {
       setError("Error adding news");
     }
     setLoading(false);
-  };
+  }; */
 
   useEffect(() => {
     const messagesCollection = collection(db, "Messages");
 
     const unsubscribe = onSnapshot(messagesCollection, (snapshot) => {
-      const newMessages = snapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id,
-      })).filter(message => message.isNew);
+      const newMessages = snapshot.docs
+        .map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+        .filter((message) => message.isNew);
 
       setMessages(newMessages);
     });
@@ -343,7 +349,7 @@ const Admin = () => {
     return () => unsubscribe(); // Clean up the listener
   }, [db]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchNewsItems = async () => {
       const newsRef = collection(db, "news");
       const newsSnapshot = await getDocs(newsRef);
@@ -355,17 +361,16 @@ const Admin = () => {
     };
 
     fetchNewsItems();
-  }, [db]);
-  
+  }, [db]); */
 
-  const deleteNewsItem = async (newsId) => {
+/*   const deleteNewsItem = async (newsId) => {
     try {
       await deleteDoc(doc(db, "news", newsId));
       setNewsItems(newsItems.filter((news) => news.id !== newsId));
     } catch (error) {
       console.error("Error deleting news item: ", error);
     }
-  };
+  }; */
 
   function toStandardTime(militaryTime) {
     if (!militaryTime) {
@@ -390,7 +395,7 @@ const Admin = () => {
 
       {/* Featured Song Form */}
 
-      <section className="section">
+      {/*       <section className="section">
         <h2>Featured Song Management:</h2>
         <div>
           <p>ONLY USE YOUTUBE URLS!</p>
@@ -424,10 +429,10 @@ const Admin = () => {
           </label>
         </div>
         <button onClick={handleUpdateFeaturedSong}>Update Featured Song</button>
-      </section>
+      </section> */}
 
       {/* Latest News Form */}
-      <section>
+      {/*       <section>
         <div className="container mt-5">
           <h1>Admin - Add Latest News</h1>
 
@@ -495,7 +500,7 @@ const Admin = () => {
           ))}
         </div>
       </section>
-
+ */}
       {/* Event Form */}
       <h2>Event Management:</h2>
       <section className="section">
@@ -569,11 +574,7 @@ const Admin = () => {
       {/* Gallery Form */}
       <section className="section">
         <h2>Gallery Management:</h2>
-        <p className="warning-text">
-          Please try to keep a limit on the number of images. Total storage is 1
-          GiB, please do not exceed 200 photos otherwise I will be charged for
-          the backend server fee. Thank you!
-        </p>
+        <p className="warning-text">There is a 20 Photo Limit. If there is an issue after deleting images, refresh page to reset limit!</p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -602,27 +603,29 @@ const Admin = () => {
         </div>
       </section>
 
-{/* Message Form */}
-<section className="section">
-  <div>
-    <section>
-      <h2>Messages</h2>
-      <button onClick={handleOpenMessages}>Delete All Messages</button> {/* Button to view messages */}
-      {messages.map((message) => (
-        <div key={message.id}>
-          <p>Name: {message.name}</p>
-          <p>Email: {message.email}</p>
-          <p>Message: {message.message}</p>
-          <p>Date: {message.timestamp?.toDate().toLocaleString()}</p>
-          <button onClick={() => handleDeleteMessage(message.id)}>
-            Delete Message
-          </button>
+      {/* Message Form */}
+      <section className="section">
+        <div>
+          <section>
+            <h2>Messages</h2>
+            <button onClick={handleOpenMessages}>
+              Delete All Messages
+            </button>{" "}
+            {/* Button to view messages */}
+            {messages.map((message) => (
+              <div key={message.id}>
+                <p>Name: {message.name}</p>
+                <p>Email: {message.email}</p>
+                <p>Message: {message.message}</p>
+                <p>Date: {message.timestamp?.toDate().toLocaleString()}</p>
+                <button onClick={() => handleDeleteMessage(message.id)}>
+                  Delete Message
+                </button>
+              </div>
+            ))}
+          </section>
         </div>
-      ))}
-    </section>
-  </div>
-</section>
-
+      </section>
 
       {/* Music Form */}
       <section className="section">
