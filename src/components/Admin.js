@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, updateEmail, updatePassword } from "firebase/auth";
 import {
   getFirestore,
   collection,
@@ -35,21 +35,23 @@ const Admin = () => {
   const [musicURL, setMusicURL] = useState("");
   const [musicReleaseDate, setMusicReleaseDate] = useState("");
   const [messages, setMessages] = useState([]);
-//  const [featuredSongURL, setFeaturedSongURL] = useState("");
-//  const [featuredSongTitle, setFeaturedSongTitle] = useState("");
-//  const [featuredSongArtist, setFeaturedSongArtist] = useState("");
-//  const [newsTitle, setNewsTitle] = useState("");
-//  const [newsContent, setNewsContent] = useState("");
-//  const [newsDate, setNewsDate] = useState("");
-//  const [loading, setLoading] = useState(false);
-//  const [error, setError] = useState(null);
-//  const [newsItems, setNewsItems] = useState([]);
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  //  const [featuredSongURL, setFeaturedSongURL] = useState("");
+  //  const [featuredSongTitle, setFeaturedSongTitle] = useState("");
+  //  const [featuredSongArtist, setFeaturedSongArtist] = useState("");
+  //  const [newsTitle, setNewsTitle] = useState("");
+  //  const [newsContent, setNewsContent] = useState("");
+  //  const [newsDate, setNewsDate] = useState("");
+  //  const [loading, setLoading] = useState(false);
+  //  const [error, setError] = useState(null);
+  //  const [newsItems, setNewsItems] = useState([]);
   const db = getFirestore();
   const MAX_IMAGES = 20;
 
-//  const handleTitleChange = (e) => setNewsTitle(e.target.value);
-//  const handleContentChange = (e) => setNewsContent(e.target.value);
-//  const handleDateChange = (e) => setNewsDate(e.target.value);
+  //  const handleTitleChange = (e) => setNewsTitle(e.target.value);
+  //  const handleContentChange = (e) => setNewsContent(e.target.value);
+  //  const handleDateChange = (e) => setNewsDate(e.target.value);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -281,6 +283,38 @@ const Admin = () => {
     }
   };
 
+  const handleChangeEmail = async (newEmail) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    try {
+      await updateEmail(user, newEmail);
+      alert("Email updated successfully");
+      console.log("Email updated successfully");
+      // Update email in state or notify user of success
+    } catch (error) {
+      console.error("Error updating email:", error);
+      alert("Error updating email:", error);
+      // Handle errors (e.g., email already in use, invalid email, etc.)
+    }
+  };
+
+  const handleChangePassword = async (newPassword) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+
+    try {
+      await updatePassword(user, newPassword);
+      alert("Password updated successfully");
+      console.log("Password updated successfully");
+      // Update state or notify user of success
+    } catch (error) {
+        alert("Error updating password:", error);
+      console.error("Error updating password:", error);
+      // Handle errors (e.g., weak password, user needs re-authentication, etc.)
+    }
+  };
+
   const handleLogout = async () => {
     try {
       const authInstance = getAuth(app);
@@ -291,7 +325,7 @@ const Admin = () => {
     }
   };
 
- /*  const handleUpdateFeaturedSong = async () => {
+  /*  const handleUpdateFeaturedSong = async () => {
     const db = getFirestore(app);
     const featuredSongRef = doc(db, "featuredSong", "1yDHsIYnMjuowB5HpP3k");
     try {
@@ -306,7 +340,7 @@ const Admin = () => {
     }
   }; */
 
-/*   const handleAddNews = async () => {
+  /*   const handleAddNews = async () => {
     if (!newsTitle || !newsContent || !newsDate) {
       setError("All fields are required");
       return;
@@ -349,7 +383,7 @@ const Admin = () => {
     return () => unsubscribe(); // Clean up the listener
   }, [db]);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     const fetchNewsItems = async () => {
       const newsRef = collection(db, "news");
       const newsSnapshot = await getDocs(newsRef);
@@ -363,7 +397,7 @@ const Admin = () => {
     fetchNewsItems();
   }, [db]); */
 
-/*   const deleteNewsItem = async (newsId) => {
+  /*   const deleteNewsItem = async (newsId) => {
     try {
       await deleteDoc(doc(db, "news", newsId));
       setNewsItems(newsItems.filter((news) => news.id !== newsId));
@@ -392,6 +426,22 @@ const Admin = () => {
         <p className="warning-text">ALWAYS LOGOUT WHEN DONE!</p>
         <button onClick={handleLogout}>Logout</button>
       </section>
+      {/* Change Email and Password form */}
+      <div>
+      <h2>Email and Password Management:</h2>
+        <input type="email" onChange={(e) => setNewEmail(e.target.value)} />
+        <button onClick={() => handleChangeEmail(newEmail)}>
+          Change Email
+        </button>
+
+        <input
+          type="password"
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+        <button onClick={() => handleChangePassword(newPassword)}>
+          Change Password
+        </button>
+      </div>
 
       {/* Featured Song Form */}
 
@@ -574,7 +624,10 @@ const Admin = () => {
       {/* Gallery Form */}
       <section className="section">
         <h2>Gallery Management:</h2>
-        <p className="warning-text">There is a 20 Photo Limit. If there is an issue after deleting images, refresh page to reset limit!</p>
+        <p className="warning-text">
+          There is a 20 Photo Limit. If there is an issue after deleting images,
+          refresh page to reset limit!
+        </p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
