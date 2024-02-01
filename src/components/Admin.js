@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAuth, signOut, updateEmail, updatePassword } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import {
   getFirestore,
   collection,
@@ -35,8 +35,9 @@ const Admin = () => {
   const [musicURL, setMusicURL] = useState("");
   const [musicReleaseDate, setMusicReleaseDate] = useState("");
   const [messages, setMessages] = useState([]);
-  const [newEmail, setNewEmail] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  // The email and password reset won't work on firebase with its current implimentation. 
+ // const [newEmail, setNewEmail] = useState("");
+//  const [newPassword, setNewPassword] = useState("");
   //  const [featuredSongURL, setFeaturedSongURL] = useState("");
   //  const [featuredSongTitle, setFeaturedSongTitle] = useState("");
   //  const [featuredSongArtist, setFeaturedSongArtist] = useState("");
@@ -283,7 +284,7 @@ const Admin = () => {
     }
   };
 
-  const handleChangeEmail = async (newEmail) => {
+/*   const handleChangeEmail = async (newEmail) => {
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -297,9 +298,9 @@ const Admin = () => {
       alert("Error updating email:", error);
       // Handle errors (e.g., email already in use, invalid email, etc.)
     }
-  };
+  }; */
 
-  const handleChangePassword = async (newPassword) => {
+/*   const handleChangePassword = async (newPassword) => {
     const auth = getAuth();
     const user = auth.currentUser;
 
@@ -313,7 +314,7 @@ const Admin = () => {
       console.error("Error updating password:", error);
       // Handle errors (e.g., weak password, user needs re-authentication, etc.)
     }
-  };
+  }; */
 
   const handleLogout = async () => {
     try {
@@ -427,7 +428,7 @@ const Admin = () => {
         <button onClick={handleLogout}>Logout</button>
       </section>
       {/* Change Email and Password form */}
-      <div>
+{/*       <div>
       <h2>Email and Password Management:</h2>
         <input type="email" onChange={(e) => setNewEmail(e.target.value)} />
         <button onClick={() => handleChangeEmail(newEmail)}>
@@ -441,7 +442,7 @@ const Admin = () => {
         <button onClick={() => handleChangePassword(newPassword)}>
           Change Password
         </button>
-      </div>
+      </div> */}
 
       {/* Featured Song Form */}
 
